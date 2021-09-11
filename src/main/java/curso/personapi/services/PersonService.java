@@ -13,7 +13,6 @@ import curso.personapi.domain.dto.PhoneDTO;
 import curso.personapi.domain.entity.Person;
 import curso.personapi.domain.entity.Phone;
 import curso.personapi.repositories.PersonRepository;
-import curso.personapi.repositories.PhoneRepository;
 
 @Service
 public class PersonService {
@@ -21,7 +20,6 @@ public class PersonService {
 	@Autowired
 	private PersonRepository repository;
 	@Autowired
-	private PhoneRepository phoneRepository;
 
 	@Transactional(readOnly = true)
 	public List<PersonDTO> findAll() {
@@ -33,7 +31,7 @@ public class PersonService {
 	public PersonDTO createPerson(PersonDTO dto) {
 		Person person = new Person(null, dto.getFirstName(), dto.getLastName(), dto.getCpf(), dto.getBirthDate());
 		for (PhoneDTO phoneDTO : dto.getPhones()) {
-			Phone phone = phoneRepository.getById(phoneDTO.getId());
+			Phone phone = new Phone(null, phoneDTO.getType(), phoneDTO.getNumber());
 			person.getPhones().add(phone);
 		}
 		repository.save(person);
