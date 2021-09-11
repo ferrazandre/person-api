@@ -1,4 +1,4 @@
-package curso.personapi.repositorys;
+package curso.personapi.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
